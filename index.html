@@ -1,1 +1,53 @@
-hello gitgeck
+<body onload=openfile()>
+
+<script>
+
+   function openfile() {
+      let fn=window.location.search.substring(1).split('\&')[0];
+      // console.log("file=",fn); alert(fn);
+      if (fn.substring(0,5)=="*file") {
+         fn=fn.substr(1);
+         var link = document.createElement('a');
+         link.href = "https://geckorr.bitbucket.io/files/"+fn;
+         link.textContent = "Click here to view "+fn;
+         // link.target = "_self";
+         document.body.appendChild(link);
+         return;
+      }
+      if (fn.substring(0,4)!=="file") {
+         alert("Error - no file specified");
+         return;
+      }
+      fsuf=fn.split('.')[1];
+      if (fsuf=="mp4") {
+         const newDiv = document.createElement('div');
+         newDiv.id='vdiv';
+         const newVid = document.createElement('video');
+         newVid.src = "https://geckorr.bitbucket.io/files/"+fn;
+         newVid.controls = true;
+         newVid.muted = false ;
+         newDiv.appendChild(newVid);
+         document.body.appendChild(newDiv);
+      }
+      else {
+         const newImage = document.createElement('img');
+         newImage.src = "https://geckorr.bitbucket.io/files/"+fn;
+         newImage.alt = "File no longer exists";
+         document.body.appendChild(newImage);
+      }
+   }
+
+</script>
+
+<style>
+   #vdiv {position:absolute; top:0; left:0; width:100%; height:100%; background-color:#000; z-index:999;}
+   video {display:block; width:100%; height: 100%;}
+   img {width:100%;height:100%;object-fit:contain;}
+   a {font-size:4vw;}
+   body {display:flex; justify-content:center; margin-top:120px;}
+</style>
+
+<br><br><br><br>
+&nbsp;&nbsp;&nbsp;
+
+</body>
